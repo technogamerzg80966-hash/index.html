@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Grade Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .quiz-box {
+            width: 400px;
+            margin: auto;
+            border: 2px solid black;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="quiz-box">
+        <h1>Grade Quiz</h1>
+
+        <p id="question">What is 2 + 2?</p>
+
+        <button onclick="checkAnswer(3)">3</button>
+        <button onclick="checkAnswer(4)">4</button>
+        <button onclick="checkAnswer(5)">5</button>
+
+        <p id="result"></p>
+    </div>
+
+    <script>
+        function checkAnswer(answer) {
+            if (answer === 4) {
+                document.getElementById("result").innerHTML =
+                    "✅ Correct!";
+            } else {
+                document.getElementById("result").innerHTML =
+                    "❌ Wrong! Try again.";
+            }
+        }
+    </script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My First Website</title>
+</head>
+<body>
+    <h1>Hello!</h1>
+    <p>Welcome to my website.</p>
+</body>
+</html>
