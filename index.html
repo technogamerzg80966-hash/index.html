@@ -3,18 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Grade Quiz</title>
+<title>Ultimate School Quiz</title>
 
 <style>
+
 *{
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:Arial, sans-serif;
+font-family:Arial,sans-serif;
 }
 
 body{
-background:#f0f4f8;
+background:linear-gradient(135deg,#1e3c72,#2a5298);
 display:flex;
 justify-content:center;
 align-items:center;
@@ -22,12 +23,12 @@ height:100vh;
 }
 
 .quiz-container{
-background:white;
+background:rgba(255,255,255,0.95);
 width:700px;
 max-width:95%;
 padding:30px;
 border-radius:15px;
-box-shadow:0 0 20px rgba(0,0,0,0.15);
+box-shadow:0 0 25px rgba(0,0,0,0.3);
 }
 
 h1{
@@ -40,6 +41,7 @@ display:flex;
 justify-content:space-between;
 margin-bottom:20px;
 font-weight:bold;
+font-size:18px;
 }
 
 .question{
@@ -90,6 +92,7 @@ text-align:center;
 font-size:28px;
 font-weight:bold;
 }
+
 </style>
 </head>
 
@@ -97,10 +100,10 @@ font-weight:bold;
 
 <div class="quiz-container">
 
-<h1>School Quiz</h1>
+<h1>🏆 Ultimate School Quiz 🏆</h1>
 
 <div class="top-bar">
-<span id="questionNumber">Question 1/5</span>
+<span id="questionNumber">Question 1/15</span>
 <span id="score">Score: 0</span>
 </div>
 
@@ -129,27 +132,87 @@ correct:1
 },
 
 {
+question:"What is 12 × 12 ?",
+answers:["124","144","154","134"],
+correct:1
+},
+
+{
+question:"What is 100 ÷ 4 ?",
+answers:["20","25","40","50"],
+correct:1
+},
+
+{
 question:"Which planet is called the Red Planet?",
 answers:["Mars","Earth","Venus","Jupiter"],
 correct:0
 },
 
 {
-question:"What is the capital of France?",
-answers:["Berlin","Madrid","Paris","Rome"],
-correct:2
-},
-
-{
-question:"Which animal is known as King of the Jungle?",
-answers:["Tiger","Elephant","Lion","Wolf"],
-correct:2
-},
-
-{
-question:"How many sides does a triangle have?",
-answers:["2","3","4","5"],
+question:"What gas do plants absorb?",
+answers:["Oxygen","Carbon Dioxide","Nitrogen","Hydrogen"],
 correct:1
+},
+
+{
+question:"What is the largest planet?",
+answers:["Earth","Mars","Saturn","Jupiter"],
+correct:3
+},
+
+{
+question:"Which word is a noun?",
+answers:["Run","Happy","School","Quickly"],
+correct:2
+},
+
+{
+question:"Choose the correct spelling.",
+answers:["Becuse","Because","Beacause","Becoz"],
+correct:1
+},
+
+{
+question:"What is the opposite of Hot?",
+answers:["Warm","Cold","Heat","Steam"],
+correct:1
+},
+
+{
+question:"What is the capital of France?",
+answers:["Berlin","Paris","Rome","Madrid"],
+correct:1
+},
+
+{
+question:"Which continent is Egypt in?",
+answers:["Europe","Asia","Africa","Australia"],
+correct:2
+},
+
+{
+question:"Which ocean is the largest?",
+answers:["Indian","Atlantic","Pacific","Arctic"],
+correct:2
+},
+
+{
+question:"Who discovered America?",
+answers:["Newton","Columbus","Einstein","Tesla"],
+correct:1
+},
+
+{
+question:"Who built the pyramids?",
+answers:["Romans","Greeks","Egyptians","Chinese"],
+correct:2
+},
+
+{
+question:"In which year did World War II end?",
+answers:["1945","1940","1939","1950"],
+correct:0
 }
 
 ];
@@ -242,3 +305,4 @@ loadQuestion();
 
 </body>
 </html>
+
