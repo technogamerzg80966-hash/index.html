@@ -1,330 +1,62 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ultimate School Quiz</title>
+🏫 Choose Grade
+├── Grade 1
+├── Grade 2
+├── Grade 3
+├── Grade 4
+├── Grade 5
+├── Grade 6
+├── Grade 7
+└── Grade 8
 
-<style>
+📚 Choose Subject
+├── Math
+├── Science
+├── English
+├── Social Studies
+└── Geography
+
+❓ Quiz Starts
 body{
 font-family:Arial,sans-serif;
-background:linear-gradient(135deg,#1e3c72,#2a5298);
+background:
+linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),
+url('https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1920');
+background-size:cover;
+background-position:center;
 display:flex;
 justify-content:center;
 align-items:center;
 height:100vh;
 margin:0;
 }
-
 .container{
-background:white;
+background:rgba(20,20,20,0.9);
+color:white;
 padding:30px;
 border-radius:15px;
 width:700px;
 max-width:95%;
-box-shadow:0 0 20px rgba(0,0,0,0.3);
+box-shadow:0 0 30px #00aaff;
 text-align:center;
 }
-
-h1{
-margin-bottom:20px;
-}
-
-.subject-btn,
-.answer-btn,
-#nextBtn{
-display:block;
-width:100%;
-padding:15px;
-margin:10px 0;
-font-size:18px;
-border:none;
-border-radius:10px;
-cursor:pointer;
-}
-
-.subject-btn{
-background:#0078ff;
-color:white;
-}
-
-.answer-btn{
-background:#e9ecef;
-}
-
-.answer-btn:hover{
-background:#d5dce3;
-}
-
-.correct{
-background:green !important;
-color:white;
-}
-
-.wrong{
-background:red !important;
-color:white;
-}
-
-#nextBtn{
-background:#0078ff;
-color:white;
-display:none;
-}
-
-#quizPage{
-display:none;
-}
-
-.top{
-display:flex;
-justify-content:space-between;
-margin-bottom:20px;
-font-weight:bold;
-}
-</style>
-</head>
-
-<body>
-
-<div class="container">
-
-<div id="subjectPage">
-
-<h1>🏆 Ultimate School Quiz</h1>
-
-<h2>Select a Subject</h2>
-
-<button class="subject-btn" onclick="startQuiz('Math')">➕ Math</button>
-
-<button class="subject-btn" onclick="startQuiz('Science')">🔬 Science</button>
-
-<button class="subject-btn" onclick="startQuiz('English')">📖 English</button>
-
-<button class="subject-btn" onclick="startQuiz('Geography')">🌍 Geography</button>
-
-<button class="subject-btn" onclick="startQuiz('History')">🏛️ History</button>
-
-</div>
-
-<div id="quizPage">
-
-<div class="top">
-<span id="questionNumber"></span>
-<span id="score">Score: 0</span>
-</div>
-
-<h2 id="question"></h2>
-
-<div id="answers"></div>
-
-<button id="nextBtn">Next Question</button>
-
-</div>
-
-<div id="result"></div>
-
-</div>
-
-<script>
-
 const quizzes = {
 
-Math:[
-{
-question:"8 × 7 = ?",
-answers:["54","56","64","72"],
-correct:1
+Grade1:{
+Math:[ ... ],
+Science:[ ... ],
+English:[ ... ]
 },
-{
-question:"100 ÷ 4 = ?",
-answers:["20","25","40","50"],
-correct:1
+
+Grade2:{
+Math:[ ... ],
+Science:[ ... ],
+English:[ ... ]
 },
-{
-question:"12 × 12 = ?",
-answers:["124","144","134","154"],
-correct:1
-}
-],
 
-Science:[
-{
-question:"Red Planet?",
-answers:["Mars","Earth","Venus","Jupiter"],
-correct:0
-},
-{
-question:"Plants absorb?",
-answers:["Oxygen","Carbon Dioxide","Hydrogen","Nitrogen"],
-correct:1
-},
-{
-question:"Largest planet?",
-answers:["Earth","Mars","Saturn","Jupiter"],
-correct:3
-}
-],
-
-English:[
-{
-question:"Which is a noun?",
-answers:["Run","Happy","School","Quickly"],
-correct:2
-},
-{
-question:"Correct spelling?",
-answers:["Becuse","Because","Beacause","Becoz"],
-correct:1
-},
-{
-question:"Opposite of Hot?",
-answers:["Warm","Cold","Heat","Steam"],
-correct:1
-}
-],
-
-Geography:[
-{
-question:"Capital of France?",
-answers:["Berlin","Paris","Rome","Madrid"],
-correct:1
-},
-{
-question:"Largest ocean?",
-answers:["Indian","Atlantic","Pacific","Arctic"],
-correct:2
-},
-{
-question:"Egypt is in?",
-answers:["Europe","Asia","Africa","Australia"],
-correct:2
-}
-],
-
-History:[
-{
-question:"Who discovered America?",
-answers:["Newton","Columbus","Einstein","Tesla"],
-correct:1
-},
-{
-question:"Who built the pyramids?",
-answers:["Romans","Greeks","Egyptians","Chinese"],
-correct:2
-},
-{
-question:"WWII ended in?",
-answers:["1945","1940","1939","1950"],
-correct:0
-}
-]
-
-};
-
-let currentQuiz=[];
-let currentQuestion=0;
-let score=0;
-
-function startQuiz(subject){
-
-currentQuiz=quizzes[subject];
-
-document.getElementById("subjectPage").style.display="none";
-document.getElementById("quizPage").style.display="block";
-
-currentQuestion=0;
-score=0;
-
-loadQuestion();
-}
-
-function loadQuestion(){
-
-let q=currentQuiz[currentQuestion];
-
-document.getElementById("questionNumber").innerText=
-`Question ${currentQuestion+1}/${currentQuiz.length}`;
-
-document.getElementById("score").innerText=
-`Score: ${score}`;
-
-document.getElementById("question").innerText=
-q.question;
-
-let answers=document.getElementById("answers");
-
-answers.innerHTML="";
-
-q.answers.forEach((answer,index)=>{
-
-let btn=document.createElement("button");
-
-btn.className="answer-btn";
-
-btn.innerText=answer;
-
-btn.onclick=()=>checkAnswer(index);
-
-answers.appendChild(btn);
-
-});
-
-document.getElementById("nextBtn").style.display="none";
-}
-
-function checkAnswer(selected){
-
-let buttons=document.querySelectorAll(".answer-btn");
-
-buttons.forEach(btn=>btn.disabled=true);
-
-let correct=currentQuiz[currentQuestion].correct;
-
-if(selected===correct){
-
-buttons[selected].classList.add("correct");
-
-score++;
-
-document.getElementById("score").innerText=
-`Score: ${score}`;
-
-}else{
-
-buttons[selected].classList.add("wrong");
-
-buttons[correct].classList.add("correct");
-
-}
-
-document.getElementById("nextBtn").style.display="block";
-}
-
-document.getElementById("nextBtn").onclick=function(){
-
-currentQuestion++;
-
-if(currentQuestion<currentQuiz.length){
-
-loadQuestion();
-
-}else{
-
-document.getElementById("quizPage").style.display="none";
-
-document.getElementById("result").innerHTML=
-`<h1>🏆 Quiz Finished!</h1>
-<h2>Your Score: ${score}/${currentQuiz.length}</h2>
-<br>
-<button class="subject-btn" onclick="location.reload()">
-Play Again
-</button>`;
+Grade3:{
+Math:[ ... ],
+Science:[ ... ],
+English:[ ... ]
 }
 
 };
-
-</script>
-
-</body>
-</html>
