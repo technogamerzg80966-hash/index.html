@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CBSE Quiz Portal</title>
+    <title>CBSE Flawless Quiz Portal</title>
     <style>
-        /* Glowing Abstract Background Style */
+        /* Glowing Deep Space Background Style */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: radial-gradient(circle at 50% 50%, #1a1a3a, #0a0a16);
+            background: radial-gradient(circle at 50% 50%, #0d0d26, #050510);
             color: #fff;
             min-height: 100vh;
             margin: 0;
@@ -19,166 +19,222 @@
             overflow-x: hidden;
         }
 
-        /* Ambient Glow Effects */
+        /* Ambient Glowing Orbs */
         body::before, body::after {
             content: '';
             position: absolute;
-            width: 300px;
-            height: 300px;
+            width: 400px;
+            height: 400px;
             border-radius: 50%;
-            background: rgba(0, 229, 255, 0.15);
-            filter: blur(80px);
+            background: rgba(0, 229, 255, 0.12);
+            filter: blur(100px);
             z-index: -1;
-            animation: float 8s infinite alternate;
+            animation: float 10s infinite alternate ease-in-out;
         }
         body::after {
-            background: rgba(255, 0, 128, 0.15);
-            right: 10%;
-            bottom: 10%;
-            animation-delay: 4s;
+            background: rgba(255, 0, 128, 0.12);
+            right: 5%;
+            bottom: 5%;
+            animation-delay: 5s;
         }
 
         @keyframes float {
             0% { transform: translateY(0px) scale(1); }
-            100% { transform: translateY(30px) scale(1.1); }
+            100% { transform: translateY(40px) scale(1.15); }
         }
 
         .container {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            padding: 30px;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 40px;
             width: 90%;
-            max-width: 600px;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            max-width: 650px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
             text-align: center;
-            transition: all 0.3s ease;
+            transition: transform 0.3s ease, opacity 0.3s ease;
         }
 
         h1 {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
+            margin-top: 0;
             margin-bottom: 10px;
             background: linear-gradient(45deg, #00e5ff, #ff0080);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 20px rgba(0, 229, 255, 0.2);
+            text-shadow: 0 0 25px rgba(0, 229, 255, 0.3);
+        }
+
+        p {
+            color: #b0b0d0;
+            font-size: 1.1rem;
         }
 
         .input-group {
-            margin: 20px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin: 30px 0;
         }
 
         select {
-            background: #111;
+            background: #0f0f25;
             color: #fff;
-            border: 1px solid #00e5ff;
-            padding: 10px 20px;
+            border: 1px solid rgba(0, 229, 255, 0.4);
+            padding: 14px 20px;
             font-size: 1rem;
-            border-radius: 8px;
+            border-radius: 10px;
             outline: none;
             cursor: pointer;
-            margin: 10px;
-            box-shadow: 0 0 10px rgba(0, 229, 255, 0.2);
+            transition: all 0.3s;
+            box-shadow: 0 0 15px rgba(0, 229, 255, 0.1);
+        }
+
+        select:focus {
+            border-color: #ff0080;
+            box-shadow: 0 0 15px rgba(255, 0, 128, 0.3);
         }
 
         button {
             background: linear-gradient(45deg, #00e5ff, #ff0080);
             color: white;
             border: none;
-            padding: 12px 30px;
-            font-size: 1rem;
+            padding: 15px 35px;
+            font-size: 1.1rem;
             font-weight: bold;
-            border-radius: 8px;
+            border-radius: 10px;
             cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-            box-shadow: 0 4px 15px rgba(0, 229, 255, 0.4);
+            transition: all 0.3s;
+            box-shadow: 0 5px 20px rgba(0, 229, 255, 0.3);
         }
 
         button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 0, 128, 0.6);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 0, 128, 0.5);
         }
 
-        .hidden { display: none; }
+        .hidden { display: none !important; }
 
-        /* Quiz Styling */
-        .quiz-box { text-align: left; }
-        .question { font-size: 1.3rem; margin-bottom: 20px; font-weight: 600; }
+        /* Quiz UI */
+        .quiz-box { text-align: left; margin-top: 25px; }
+        .question { font-size: 1.35rem; margin-bottom: 25px; font-weight: 600; line-height: 1.5; }
         
         .option-btn {
             display: block;
             width: 100%;
-            background: rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            color: white;
+            color: #def7ff;
             text-align: left;
-            padding: 12px 20px;
-            margin: 10px 0;
-            border-radius: 8px;
-            box-shadow: none;
+            padding: 15px 20px;
+            margin: 12px 0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.2s;
         }
 
         .option-btn:hover {
-            background: rgba(0, 229, 255, 0.2);
+            background: linear-gradient(90deg, rgba(0, 229, 255, 0.15), rgba(255, 0, 128, 0.05));
             border-color: #00e5ff;
-            transform: none;
+            transform: translateX(5px);
+        }
+
+        .progress-bar {
+            height: 6px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #00e5ff, #ff0080);
+            transition: width 0.3s ease;
         }
     </style>
 </head>
 <body>
 
     <div class="container" id="setup-screen">
-        <h1>CBSE Quiz Hub</h1>
-        <p>Select your grade and subject to begin</p>
+        <h1>CBSE Grand Portal</h1>
+        <p>Choose your level and subject to begin your evaluation</p>
         
         <div class="input-group">
             <select id="grade-select">
+                <option value="6">Grade 6</option>
+                <option value="7">Grade 7</option>
+                <option value="8">Grade 8</option>
+                <option value="9">Grade 9</option>
                 <option value="10">Grade 10</option>
+                <option value="11">Grade 11</option>
                 <option value="12">Grade 12</option>
             </select>
 
             <select id="subject-select">
-                <option value="Science">Science / Physics</option>
                 <option value="Mathematics">Mathematics</option>
+                <option value="Science">Science / Physics</option>
+                <option value="Social Science">Social Science</option>
+                <option value="English">English</option>
             </select>
         </div>
 
-        <button onclick="startQuiz()">Start Flawless Quiz</button>
+        <button onclick="startQuiz()">Launch Test</button>
     </div>
 
     <div class="container hidden" id="quiz-screen">
-        <h2 id="quiz-title" style="margin-top:0; color:#00e5ff;"></h2>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+            <span id="quiz-title" style="color:#00e5ff; font-weight: bold;"></span>
+            <span id="question-count" style="color: #b0b0d0;"></span>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+        
         <div class="quiz-box">
-            <div class="question" id="question-text">Loading question...</div>
+            <div class="question" id="question-text"></div>
             <div id="options-container"></div>
         </div>
     </div>
 
     <div class="container hidden" id="result-screen">
-        <h1>Quiz Completed!</h1>
-        <p id="score-text" style="font-size: 1.5rem; margin: 20px 0;"></p>
-        <button onclick="resetQuiz()">Try Another Quiz</button>
+        <h1>Evaluation Complete</h1>
+        <p id="score-text" style="font-size: 1.6rem; margin: 30px 0; font-weight: bold; color: #00e5ff;"></p>
+        <button onclick="resetQuiz()">Take Another Quiz</button>
     </div>
 
     <script>
-        // EXPAND THIS DATA OBJECT TO ADD ALL 30 QUESTIONS PER SUBJECT
+        // EXPANDABLE GLOBAL DATABASE
+        // To build up to 30 questions, add items inside the arrays matching the target grade and subject.
         const quizDatabase = {
-            "10": {
-                "Science": [
-                    { q: "What is the chemical formula of Rust?", options: ["Fe2O3 · xH2O", "FeO", "Fe3O4", "FeCl3"], answer: 0 },
-                    { q: "Which plant hormone inhibits growth?", options: ["Auxin", "Gibberellin", "Abscisic Acid", "Cytokinin"], answer: 2 }
-                ],
+            "6": {
                 "Mathematics": [
-                    { q: "What is the discriminant of the equation $x^2 - 4x + 4 = 0$?", options: ["4", "0", "-4", "16"], answer: 1 }
+                    { q: "What is the smallest prime number?", options: ["0", "1", "2", "3"], answer: 2 },
+                    { q: "Which of the following is a factor of every number?", options: ["0", "1", "2", "Itself"], answer: 1 }
+                ],
+                "Science": [
+                    { q: "Which component of food prevents constipation?", options: ["Proteins", "Carbohydrates", "Roughage", "Vitamins"], answer: 2 }
+                ]
+            },
+            "10": {
+                "Mathematics": [
+                    { q: "The pair of equations x + 2y + 5 = 0 and -3x - 6y + 1 = 0 has:", options: ["Unique solution", "Exactly two solutions", "Infinitely many solutions", "No solution"], answer: 3 }
+                ],
+                "Science": [
+                    { q: "Which part of the human brain controls posture and balance?", options: ["Cerebrum", "Cerebellum", "Medulla", "Pons"], answer: 1 }
+                ],
+                "Social Science": [
+                    { q: "Who wrote the book 'Hind Swaraj'?", options: ["Mahatma Gandhi", "Jawaharlal Nehru", "Subhas Chandra Bose", "Bhagat Singh"], answer: 0 }
                 ]
             },
             "12": {
-                "Science": [
-                    { q: "SI unit of Electric Flux is:", options: ["N/C", "V·m", "C/N", "Wb"], answer: 1 }
-                ],
                 "Mathematics": [
-                    { q: "What is the derivative of $\sin(x^2)$?", options: ["$2x \cos(x^2)$", "$\cos(x^2)$", "$-2x \cos(x^2)$", "$2\sin(x)$"], answer: 0 }
+                    { q: "If a matrix is both symmetric and skew-symmetric, then it is a:", options: ["Diagonal matrix", "Zero matrix", "Square matrix", "Identity matrix"], answer: 1 }
+                ],
+                "Science": [
+                    { q: "What is the unit of specific resistance (resistivity)?", options: ["Ohm-meter", "Ohm / meter", "Mho-meter", "Ohm"], answer: 0 }
                 ]
             }
         };
@@ -188,10 +244,12 @@
         function startQuiz() {
             currentGrade = document.getElementById('grade-select').value;
             currentSubject = document.getElementById('subject-select').value;
+            
+            // Safe checking if the selected combo exists in our database
             selectedQuizData = quizDatabase[currentGrade]?.[currentSubject] || [];
 
             if (selectedQuizData.length === 0) {
-                alert("No questions added for this selection yet!");
+                alert(`Hey! The structural template for Grade ${currentGrade} - ${currentSubject} is ready, but questions haven't been pasted into the code script yet.`);
                 return;
             }
 
@@ -201,49 +259,4 @@
             document.getElementById('setup-screen').classList.add('hidden');
             document.getElementById('quiz-screen').classList.remove('hidden');
             
-            document.getElementById('quiz-title').innerText = `Grade ${currentGrade} - ${currentSubject}`;
-            showQuestion();
-        }
-
-        function showQuestion() {
-            const currentQ = selectedQuizData[currentQuestionIndex];
-            document.getElementById('question-text').innerText = `${currentQuestionIndex + 1}. ${currentQ.q}`;
-            
-            const optionsContainer = document.getElementById('options-container');
-            optionsContainer.innerHTML = '';
-
-            currentQ.options.forEach((option, index) => {
-                const btn = document.createElement('button');
-                btn.className = 'option-btn';
-                btn.innerText = option;
-                btn.onclick = () => handleAnswer(index);
-                optionsContainer.appendChild(btn);
-            });
-        }
-
-        function handleAnswer(selectedIndex) {
-            if (selectedIndex === selectedQuizData[currentQuestionIndex].answer) {
-                score++;
-            }
-
-            currentQuestionIndex++;
-            if (currentQuestionIndex < selectedQuizData.length) {
-                showQuestion();
-            } else {
-                showResults();
-            }
-        }
-
-        function showResults() {
-            document.getElementById('quiz-screen').classList.add('hidden');
-            document.getElementById('result-screen').classList.remove('hidden');
-            document.getElementById('score-text').innerText = `You scored ${score} out of ${selectedQuizData.length}!`;
-        }
-
-        function resetQuiz() {
-            document.getElementById('result-screen').classList.add('hidden');
-            document.getElementById('setup-screen').classList.remove('hidden');
-        }
-    </script>
-</body>
-</html>
+            document
