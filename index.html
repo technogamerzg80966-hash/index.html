@@ -64,8 +64,9 @@
             text-align: left;
         }
         .option-btn:hover {
-            background: #00e5ff;
-            color: black;
+            background: linear-gradient(90deg, #00e5ff, #ff0080);
+            color: white;
+            border-color: transparent;
         }
     </style>
 </head>
@@ -98,7 +99,7 @@
     <div class="container hidden" id="screen-quiz">
         <h2 id="quiz-header" style="color:#00e5ff; margin-top:0;"></h2>
         <h3 id="quiz-progress" style="color:#aaa;"></h3>
-        <div id="quiz-question" style="font-size:1.3rem; margin:20px 0; text-align:left; font-weight:600;"></div>
+        <div id="quiz-question" style="font-size:1.3rem; margin:20px 0; text-align:left; font-weight:600; line-height: 1.4;"></div>
         <div id="quiz-options"></div>
     </div>
 
@@ -109,26 +110,78 @@
     </div>
 
     <script>
-        // Completely simplified execution logic attached directly to DOM load
+        // MAIN DATA BANK - You can keep adding distinct questions here
+        const masterDatabase = {
+            "6": {
+                "Mathematics": [
+                    { q: "What is the perimeter of a rectangle with length 5cm and breadth 3cm?", options: ["15 cm", "16 cm", "8 cm", "25 cm"], correct: 1 },
+                    { q: "Which of the following numbers is a perfect square?", options: ["22", "35", "49", "50"], correct: 2 },
+                    { q: "What is the value of 100 - 45 + 5?", options: ["50", "60", "55", "45"], correct: 1 }
+                ],
+                "Science": [
+                    { q: "Which component of air is essential for respiration in living organisms?", options: ["Nitrogen", "Carbon Dioxide", "Oxygen", "Argon"], answer: 2 },
+                    { q: "Which of these is a synthetic fiber?", options: ["Cotton", "Nylon", "Wool", "Silk"], correct: 1 }
+                ],
+                "Social Science": [
+                    { q: "Which planet is known as the Blue Planet?", options: ["Mars", "Earth", "Venus", "Jupiter"], correct: 1 },
+                    { q: "Who was the first Prime Minister of independent India?", options: ["Mahatma Gandhi", "Dr. B.R. Ambedkar", "Jawaharlal Nehru", "Sardar Patel"], correct: 2 }
+                ],
+                "English": [
+                    { q: "Identify the noun in the sentence: 'The dog barked loudly.'", options: ["barked", "loudly", "The", "dog"], correct: 3 }
+                ]
+            },
+            "10": {
+                "Science": [
+                    { q: "Which acid is present in tomato?", options: ["Citric acid", "Oxalic acid", "Lactic acid", "Tartaric acid"], correct: 1 },
+                    { q: "The focal length of a plane mirror is:", options: ["Zero", "Infinity", "25 cm", "-25 cm"], correct: 1 }
+                ]
+            }
+        };
+
         document.getElementById('launch-btn').addEventListener('click', function() {
             const selectedGrade = document.getElementById('grade').value;
             const selectedSubject = document.getElementById('subject').value;
             
-            let questions = [];
-            // Dynamically generate 30 working questions instantly on click 
-            // This bypasses any mapping errors or missing key crashes entirely
-            for (let i = 1; i <= 30; i++) {
-                questions.push({
-                    q: `Grade ${selectedGrade} • ${selectedSubject} — Evaluation Question ${i} of 30.`,
-                    options: ["Option A (Incorrect)", "Option B (Correct)", "Option C (Incorrect)", "Option D (Incorrect)"],
-                    correct: 1
-                });
+            // Extract core questions from data block
+            let baseQuestions = [];
+            if (masterDatabase[selectedGrade] && masterDatabase[selectedGrade][selectedSubject]) {
+                baseQuestions = [...masterDatabase[selectedGrade][selectedSubject]];
+            }
+
+            // AUTO GENERATOR FALLBACK: Generates unique standard questions if data block array is smaller than 30
+            let questions = [...baseQuestions];
+            if (questions.length < 30) {
+                const standardPool = [
+                    { q: "Which of these units is used to measure electrical current?", options: ["Volt", "Ampere", "Ohm", "Watt"], correct: 1 },
+                    { q: "What state of matter has a definite volume but no definite shape?", options: ["Solid", "Liquid", "Gas", "Plasma"], correct: 1 },
+                    { q: "Find the value of x if 2x + 5 = 15.", options: ["x = 10", "x = 2", "x = 5", "x = 4"], correct: 2 },
+                    { q: "Which gas is majorly responsible for the greenhouse effect?", options: ["Oxygen", "Carbon Dioxide", "Nitrogen", "Hydrogen"], correct: 1 },
+                    { q: "Which geometric shape has exactly 5 straight sides?", options: ["Hexagon", "Pentagon", "Octagon", "Square"], correct: 1 },
+                    { q: "What is the chemical symbol for Water?", options: ["HO2", "CO2", "H2O", "NaCl"], correct: 2 },
+                    { q: "The process of plants preparing food is called:", options: ["Respiration", "Transpiration", "Photosynthesis", "Fermentation"], correct: 2 }
+                ];
+                
+                let counter = 1;
+                while (questions.length < 30) {
+                    let randomTemplate = standardPool[Math.floor(Math.random() * standardPool.length)];
+                    questions.push({
+                        q: `[Practice Set Q${counter}] ${randomTemplate.q}`,
+                        options: [...randomTemplate.options],
+                        correct: randomTemplate.correct
+                    });
+                    counter++;
+                }
+            }
+
+            // SHUFFLE LOGIC (Fisher-Yates Shuffle Algorithm)
+            for (let i = questions.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [questions[i], questions[j]] = [questions[j], questions[i]];
             }
 
             let currentIndex = 0;
             let score = 0;
 
-            // Swap Screens smoothly
             document.getElementById('screen-setup').classList.add('hidden');
             document.getElementById('screen-quiz').classList.remove('hidden');
             document.getElementById('quiz-header').innerText = `Grade ${selectedGrade} • ${selectedSubject}`;
