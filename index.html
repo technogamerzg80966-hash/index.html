@@ -53,7 +53,7 @@
             border: none;
             font-weight: bold;
             cursor: pointer;
-            transition: transform 0.2s, background 0.3s;
+            transition: transform 0.2s;
         }
         button:hover { transform: translateY(-2px); }
         .hidden { display: none !important; }
@@ -69,8 +69,6 @@
             background: rgba(0, 229, 255, 0.2);
             border-color: #00e5ff;
         }
-
-        /* Instant Feedback States */
         .option-btn.correct {
             background: #00c853 !important;
             border-color: #00c853 !important;
@@ -123,35 +121,135 @@
     </div>
 
     <script>
-        // EXPANDED SEPARATE SUBJECT POOLS
+        // FULL EXTENSIVE BANK - 30 DISTINCT QUESTIONS PER SUBJECT
         const subjectsData = {
             "English": [
-                { q: "What is the antonym of the word 'Ancient'?", options: ["Old", "Modern", "Historic", "Past"] },
+                { q: "What is the antonym of the word 'Ancient'?", options: ["Modern", "Old", "Historic", "Past"] },
                 { q: "Identify the pronoun in the sentence: 'She went to the market.'", options: ["She", "went", "market", "to"] },
-                { q: "Which of these is a regular verb?", options: ["Go", "Eat", "Walk", "See"] },
+                { q: "Which of these is a regular verb?", options: ["Walk", "Go", "Eat", "See"] },
                 { q: "Choose the correctly spelled word:", options: ["Receive", "Recieve", "Receve", "Ricieve"] },
-                { q: "What is the plural form of 'Child'?", options: ["Childs", "Children", "Childrens", "Childes"] }
+                { q: "What is the plural form of 'Child'?", options: ["Children", "Childs", "Childrens", "Childes"] },
+                { q: "Which word is a synonym of 'Beautiful'?", options: ["Gorgeous", "Ugly", "Plain", "Dull"] },
+                { q: "Identify the adjective: 'The tall building stood high.'", options: ["tall", "building", "stood", "high"] },
+                { q: "What is the past tense of 'Run'?", options: ["Ran", "Runned", "Running", "Runs"] },
+                { q: "Complete the sentence: 'Honesty is ___ best policy.'", options: ["the", "a", "an", "no article"] },
+                { q: "Which word means a person who writes books?", options: ["Author", "Painter", "Doctor", "Chef"] },
+                { q: "What is the opposite of 'Heavy'?", options: ["Light", "Weighty", "Large", "Hard"] },
+                { q: "Identify the conjunction: 'I like coffee but I hate tea.'", options: ["but", "like", "coffee", "hate"] },
+                { q: "What is a collective noun for a group of lions?", options: ["Pride", "Herd", "Pack", "Flock"] },
+                { q: "Which suffix can change 'Hope' into an adjective?", options: ["-ful", "-ly", "-ment", "-ness"] },
+                { q: "Find the adverb: 'He solved the puzzle easily.'", options: ["easily", "solved", "puzzle", "He"] },
+                { q: "What is the comparative form of 'Good'?", options: ["Better", "Best", "Gooder", "More good"] },
+                { q: "Which sentence is in the present continuous tense?", options: ["They are playing football.", "They play football.", "They played football.", "They will play football."] },
+                { q: "Choose the correct preposition: 'The book is ___ the table.'", options: ["on", "in", "at", "underneath"] },
+                { q: "What is the synonym of 'Quick'?", options: ["Fast", "Slow", "Lazy", "Heavy"] },
+                { q: "Identify the silent letter in 'Knife':", options: ["K", "N", "I", "E"] },
+                { q: "What type of sentence is this: 'Wow, what a beautiful view!'", options: ["Exclamatory", "Declarative", "Imperative", "Interrogative"] },
+                { q: "What is the singular form of 'Mice'?", options: ["Mouse", "Mouses", "Mice", "Mousie"] },
+                { q: "Choose the word that describes a person who cannot see:", options: ["Blind", "Deaf", "Mute", "Lame"] },
+                { q: "What is the prefix in the word 'Unhappy'?", options: ["Un", "Happy", "Hap", "Py"] },
+                { q: "Which of these represents a masculine gender?", options: ["King", "Queen", "Princess", "Actress"] },
+                { q: "Identify the proper noun: 'We visited New Delhi last week.'", options: ["New Delhi", "visited", "last", "week"] },
+                { q: "What is the past participle form of 'Write'?", options: ["Written", "Wrote", "Writing", "Writes"] },
+                { q: "Select the sentence with correct punctuation:", options: ["Where are you going?", "where are you going.", "Where are you going!", "Where, are you going"] },
+                { q: "What is the female gender of 'Horse'?", options: ["Mare", "Cow", "Bitch", "Hen"] },
+                { q: "Complete the idiom: 'Piece of ___'", options: ["cake", "bread", "apple", "pie"] }
             ],
             "Mathematics": [
                 { q: "What is the value of x if 3x - 7 = 14?", options: ["7", "6", "5", "8"] },
                 { q: "What is the area of a square whose side is 6 cm?", options: ["36 sq cm", "24 sq cm", "12 sq cm", "18 sq cm"] },
                 { q: "What is the smallest prime number?", options: ["2", "1", "0", "3"] },
                 { q: "What is 15% of 200?", options: ["30", "20", "15", "40"] },
-                { q: "How many degrees are there in a straight line?", options: ["180°", "90°", "360°", "270°"] }
+                { q: "How many degrees are there in a straight line?", options: ["180°", "90°", "360°", "270°"] },
+                { q: "What is the formula for the perimeter of a rectangle?", options: ["2(l + b)", "l × b", "side × side", "4 × side"] },
+                { q: "Solve: (-5) + (-8) = ?", options: ["-13", "13", "-3", "3"] },
+                { q: "The value of pi (π) up to two decimal places is:", options: ["3.14", "3.12", "2.14", "3.16"] },
+                { q: "What is the square root of 144?", options: ["12", "14", "16", "10"] },
+                { q: "An angle greater than 90° but less than 180° is called:", options: ["Obtuse angle", "Acute angle", "Right angle", "Reflex angle"] },
+                { q: "What is the cube of 5?", options: ["125", "25", "75", "150"] },
+                { q: "How many surfaces does a cube have?", options: ["6", "8", "12", "4"] },
+                { q: "If the radius of a circle is 7 cm, what is its diameter?", options: ["14 cm", "21 cm", "49 cm", "7 cm"] },
+                { q: "What is the LCM of 4 and 6?", options: ["12", "24", "4", "6"] },
+                { q: "The product of a rational and an irrational number is always:", options: ["Irrational", "Rational", "Integer", "Whole number"] },
+                { q: "What is the sum of all interior angles of a triangle?", options: ["180°", "360°", "90°", "270°"] },
+                { q: "Solve: 10 + 2 × 5", options: ["20", "60", "30", "17"] },
+                { q: "Which of the following numbers is divisible by 3?", options: ["123", "451", "203", "101"] },
+                { q: "The additive inverse of -9 is:", options: ["9", "-9", "0", "1"] },
+                { q: "How many seconds are there in one hour?", options: ["3600", "60", "600", "360"] },
+                { q: "The highest power of the variable in a linear equation is:", options: ["1", "2", "0", "3"] },
+                { q: "What is the value of 5 to the power of 0?", options: ["1", "5", "0", "10"] },
+                { q: "What do you call a polygon with eight sides?", options: ["Octagon", "Hexagon", "Heptagon", "Pentagon"] },
+                { q: "Convert 3/4 into percentage:", options: ["75%", "50%", "25%", "80%"] },
+                { q: "What is the multiplicative identity for rational numbers?", options: ["1", "0", "-1", "None"] },
+                { q: "What is the value of 1000 meters in kilometers?", options: ["1 km", "10 km", "0.1 km", "100 km"] },
+                { q: "The probability of a certain event is always:", options: ["1", "0", "0.5", "2"] },
+                { q: "What is the mean of 2, 4, 6, 8, 10?", options: ["6", "5", "4", "7"] },
+                { q: "If a side of an equilateral triangle is 5cm, what is its perimeter?", options: ["15 cm", "10 cm", "20 cm", "25 cm"] },
+                { q: "Which value represents the golden ratio roughly?", options: ["1.618", "3.141", "2.718", "1.414"] }
             ],
             "Science": [
                 { q: "Which gas do plants absorb during photosynthesis?", options: ["Carbon Dioxide", "Oxygen", "Nitrogen", "Hydrogen"] },
                 { q: "What is the SI unit of force?", options: ["Newton", "Joule", "Watt", "Pascal"] },
                 { q: "Which planet is closest to the Sun?", options: ["Mercury", "Venus", "Earth", "Mars"] },
                 { q: "What is the chemical symbol for Gold?", options: ["Au", "Ag", "Fe", "Gd"] },
-                { q: "Which component of blood helps in clotting?", options: ["Platelets", "Red Blood Cells", "White Blood Cells", "Plasma"] }
+                { q: "Which component of blood helps in clotting?", options: ["Platelets", "Red Blood Cells", "White Blood Cells", "Plasma"] },
+                { q: "What is the master gland of the human endocrine system?", options: ["Pituitary Gland", "Thyroid Gland", "Adrenal Gland", "Pancreas"] },
+                { q: "Sound waves travel fastest through which medium?", options: ["Solids", "Liquids", "Gases", "Vacuum"] },
+                { q: "What is the normal body temperature of a healthy human?", options: ["37°C", "98.6°C", "32°C", "42°C"] },
+                { q: "Which acid is found in lemons?", options: ["Citric Acid", "Acetic Acid", "Lactic Acid", "Tartaric Acid"] },
+                { q: "What type of lens is used to correct short-sightedness (Myopia)?", options: ["Concave lens", "Convex lens", "Bifocal lens", "Cylindrical lens"] },
+                { q: "Which planet is known as the Evening Star?", options: ["Venus", "Mars", "Jupiter", "Saturn"] },
+                { q: "What is the chemical name of common salt?", options: ["Sodium Chloride", "Sodium Bicarbonate", "Calcium Carbonate", "Potassium Chloride"] },
+                { q: "What is the process of conversion of water vapor into water liquid?", options: ["Condensation", "Evaporation", "Sublimation", "Freezing"] },
+                { q: "Which instrument measures atmospheric pressure?", options: ["Barometer", "Thermometer", "Ammeter", "Hydrometer"] },
+                { q: "Which vitamin is synthesized by human skin exposed to sunlight?", options: ["Vitamin D", "Vitamin C", "Vitamin A", "Vitamin K"] },
+                { q: "What is the percentage of Nitrogen gas in Earth's atmosphere?", options: ["78%", "21%", "0.03%", "0.9%"] },
+                { q: "Which cell organelle is called the Powerhouse of the cell?", options: ["Mitochondria", "Nucleus", "Ribosome", "Golgi Body"] },
+                { q: "What form of energy is stored in a battery?", options: ["Chemical Energy", "Kinetic Energy", "Electrical Energy", "Potential Energy"] },
+                { q: "Deficiency of Vitamin A causes which medical condition?", options: ["Night Blindness", "Scurvy", "Rickets", "Beriberi"] },
+                { q: "What is the atomic number of Hydrogen?", options: ["1", "2", "6", "8"] },
+                { q: "Which metal is liquid at room temperature?", options: ["Mercury", "Gallium", "Sodium", "Bromine"] },
+                { q: "What is the chemical formula for Ozone?", options: ["O3", "O2", "CO2", "H2O"] },
+                { q: "The green pigment present in leaves is called:", options: ["Chlorophyll", "Hemoglobin", "Xanthophyll", "Carotene"] },
+                { q: "Which layer of the atmosphere contains the protective ozone layer?", options: ["Stratosphere", "Troposphere", "Mesosphere", "Thermosphere"] },
+                { q: "What type of graph displays a change over time?", options: ["Line graph", "Bar chart", "Pie chart", "Scatter plot"] },
+                { q: "What is the escape velocity from the Earth's surface approximately?", options: ["11.2 km/s", "8.5 km/s", "5.6 km/s", "15.0 km/s"] },
+                { q: "Which non-metal conducts electricity?", options: ["Graphite", "Diamond", "Sulphur", "Phosphorus"] },
+                { q: "What type of mirror is used as a rearview mirror in vehicles?", options: ["Convex mirror", "Concave mirror", "Plane mirror", "Biconcave mirror"] },
+                { q: "Which resource is fully renewable?", options: ["Solar Energy", "Coal", "Petroleum", "Natural Gas"] },
+                { q: "What is the main component of Natural Gas?", options: ["Methane", "Butane", "Propane", "Ethane"] }
             ],
             "Social Science": [
                 { q: "Who is known as the Father of the Indian Constitution?", options: ["Dr. B.R. Ambedkar", "Mahatma Gandhi", "Jawaharlal Nehru", "Dr. Rajendra Prasad"] },
                 { q: "Which is the longest river in the world?", options: ["Nile", "Amazon", "Yangtze", "Mississippi"] },
                 { q: "In which year did India gain Independence?", options: ["1947", "1950", "1942", "1935"] },
                 { q: "What is the capital city of France?", options: ["Paris", "London", "Berlin", "Rome"] },
-                { q: "Which line divides India into almost two equal halves?", options: ["Tropic of Cancer", "Equator", "Tropic of Capricorn", "Prime Meridian"] }
+                { q: "Which line divides India into almost two equal halves?", options: ["Tropic of Cancer", "Equator", "Tropic of Capricorn", "Prime Meridian"] },
+                { q: "Who was the founder of the Mughal Empire in India?", options: ["Babur", "Akbar", "Sher Shah Suri", "Humayun"] },
+                { q: "Which is the smallest state in India by area?", options: ["Goa", "Sikkim", "Tripura", "Mizoram"] },
+                { q: "The city of Harappa was located near which river?", options: ["Ravi", "Indus", "Ganga", "Yamuna"] },
+                { q: "How many fundamental rights are recognized by the Indian Constitution?", options: ["6", "7", "10", "5"] },
+                { q: "Which ocean is the deepest in the world?", options: ["Pacific Ocean", "Atlantic Ocean", "Indian Ocean", "Arctic Ocean"] },
+                { q: "Who wrote 'Discovery of India'?", options: ["Jawaharlal Nehru", "Mahatma Gandhi", "Subhas Chandra Bose", "Rabindranath Tagore"] },
+                { q: "What is the term of office for a member of the Rajya Sabha?", options: ["6 years", "5 years", "4 years", "Permanent"] },
+                { q: "Which movement was started by Gandhi ji in 1942?", options: ["Quit India Movement", "Non-Cooperation Movement", "Civil Disobedience Movement", "Khilafat Movement"] },
+                { q: "Which country has the largest written constitution in the world?", options: ["India", "USA", "UK", "Russia"] },
+                { q: "Where is the Silicon Valley of India located?", options: ["Bengaluru", "Hyderabad", "Mumbai", "Pune"] },
+                { q: "Who was the first female Prime Minister of India?", options: ["Indira Gandhi", "Pratibha Patil", "Sarojini Naidu", "Sushma Swaraj"] },
+                { q: "Which landmark event happened in Europe in 1789?", options: ["French Revolution", "Russian Revolution", "Industrial Revolution", "World War 1"] },
+                { q: "What is the official currency of Japan?", options: ["Yen", "Yuan", "Won", "Dollar"] },
+                { q: "Which pass connects India with Tibet?", options: ["Nathu La Pass", "Zoji La Pass", "Rohtang Pass", "Baniha Pass"] },
+                { q: "Who compositioned the National Anthem of India?", options: ["Rabindranath Tagore", "Bankim Chandra Chatterjee", "Sri Aurobindo", "Sarojini Naidu"] },
+                { q: "Which sector contributes the most to employment in India?", options: ["Primary Sector", "Secondary Sector", "Tertiary Sector", "IT Sector"] },
+                { q: "Where is the headquarters of the United Nations located?", options: ["New York", "Geneva", "Paris", "London"] },
+                { q: "Which imaginary lines run horizontally around the globe?", options: ["Latitudes", "Longitudes", "Contours", "Grid Lines"] },
+                { q: "Who was the first European to reach India by sea?", options: ["Vasco da Gama", "Christopher Columbus", "Ferdinand Magellan", "Marco Polo"] ] },
+                { q: "Which animal was widely used in ancient Ashvamedha rituals?", options: ["Horse", "Elephant", "Bull", "Lion"] },
+                { q: "What institution regulates monetary policy in India?", options: ["Reserve Bank of India", "State Bank of India", "Ministry of Finance", "SEBI"] },
+                { q: "Which Indian festival marks the victory of light over darkness?", options: ["Diwali", "Holi", "Eid", "Dussehra"] },
+                { q: "What type of government structure exists in the United Kingdom?", options: ["Constitutional Monarchy", "Absolute Democracy", "Military Dictatorship", "Presidential Republic"] },
+                { q: "Which ranges form the northern boundary of India?", options: ["Himalayas", "Aravalis", "Western Ghats", "Vindhyas"] },
+                { q: "Which country shares the longest international land border with India?", options: ["Bangladesh", "China", "Pakistan", "Nepal"] }
             ]
         };
 
@@ -159,36 +257,28 @@
             const selectedGrade = document.getElementById('grade').value;
             let selectedSubject = document.getElementById('subject').value;
             
-            // Normalize alternate name "Science / Physics" to key match "Science"
             if(selectedSubject === "Science / Physics") selectedSubject = "Science";
 
-            // Grab the subject specific list
-            let sourcePool = subjectsData[selectedSubject] || [];
+            // Safe reference extraction
+            let basePool = subjectsData[selectedSubject] || [];
             let questions = [];
 
-            // Duplicate/Generate up to 30 unique variants specifically for that subject
-            let variantCounter = 1;
-            while(questions.length < 30 && sourcePool.length > 0) {
-                sourcePool.forEach(item => {
-                    if(questions.length < 30) {
-                        questions.push({
-                            q: `(${selectedSubject} Q${variantCounter}) ${item.q}`,
-                            // Store the first item as the absolute correct textual answer
-                            correctText: item.options[0], 
-                            options: [...item.options]
-                        });
-                        variantCounter++;
-                    }
+            // Clone structure arrays neatly to maintain original data bank integrity
+            basePool.forEach(item => {
+                questions.push({
+                    q: item.q,
+                    correctText: item.options[0], // Truth value is always indexed first
+                    options: [...item.options]
                 });
-            }
+            });
 
-            // SHUFFLE ALGORITHM 1: Re-arrange the questions array
+            // FISHER-YATES SHUFFLE 1: Randomize Question Positions Fully
             for (let i = questions.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
                 [questions[i], questions[j]] = [questions[j], questions[i]];
             }
 
-            // SHUFFLE ALGORITHM 2: Re-arrange the options arrays individually inside each question
+            // FISHER-YATES SHUFFLE 2: Randomize Alternative Options inside each question independently
             questions.forEach(item => {
                 for (let i = item.options.length - 1; i > 0; i--) {
                     const j = Math.floor(Math.random() * (i + 1));
@@ -217,23 +307,19 @@
                     btn.innerText = opt;
                     
                     btn.onclick = function() {
-                        // Freeze all buttons so users cannot click multiple choices
                         const allBtns = optionsDiv.querySelectorAll('.option-btn');
                         allBtns.forEach(b => b.disabled = true);
 
-                        // Visual Verification Check
                         if (opt === currentQ.correctText) {
                             btn.classList.add('correct');
                             score++;
                         } else {
                             btn.classList.add('incorrect');
-                            // Find and highlight the correct button in green so they can see the right choice
                             allBtns.forEach(b => {
                                 if(b.innerText === currentQ.correctText) b.classList.add('correct');
                             });
                         }
 
-                        // Short delay so they can read and learn the correct choice before sliding over
                         setTimeout(() => {
                             currentIndex++;
                             if (currentIndex < questions.length) {
