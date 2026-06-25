@@ -87,8 +87,10 @@
             color: white !important;
         }
         #next-btn {
-            margin-top: 20px;
-            background: linear-gradient(45deg, #00e5ff, #0080ff);
+            margin-top: 25px;
+            background: linear-gradient(45deg, #ff0080, #ff8000) !important;
+            box-shadow: 0 4px 15px rgba(255, 0, 128, 0.4);
+            font-size: 1.1rem;
         }
     </style>
 </head>
@@ -281,13 +283,13 @@
                 });
             });
 
-            // FISHER-YATES SHUFFLE 1: Randomize Questions
+            // FISHER-YATES SHUFFLE 1: Questions
             for (let i = questions.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
                 [questions[i], questions[j]] = [questions[j], questions[i]];
             }
 
-            // FISHER-YATES SHUFFLE 2: Randomize Options Individually
+            // FISHER-YATES SHUFFLE 2: Options
             questions.forEach(item => {
                 for (let i = item.options.length - 1; i > 0; i--) {
                     const j = Math.floor(Math.random() * (i + 1));
@@ -305,7 +307,7 @@
             const nextBtn = document.getElementById('next-btn');
 
             function renderQuestion() {
-                // Hide next button on new question render
+                // Ensure Next button is explicitly hidden when rendering a fresh question
                 nextBtn.classList.add('hidden');
 
                 const currentQ = questions[currentIndex];
@@ -334,7 +336,7 @@
                             });
                         }
 
-                        // Reveal Next button instead of using a timer
+                        // FORCE NEXT BUTTON VISIBILITY
                         nextBtn.classList.remove('hidden');
                     };
                     optionsDiv.appendChild(btn);
