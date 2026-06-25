@@ -64,6 +64,13 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
             text-align: left;
             transition: all 0.2s ease;
+            width: 100%;
+            padding: 15px;
+            margin: 8px 0;
+            border-radius: 10px;
+            font-size: 1rem;
+            box-sizing: border-box;
+            cursor: pointer;
         }
         .option-btn:hover:not([disabled]) {
             background: rgba(0, 229, 255, 0.2);
@@ -121,7 +128,6 @@
     </div>
 
     <script>
-        // FULL EXTENSIVE BANK - 30 DISTINCT QUESTIONS PER SUBJECT
         const subjectsData = {
             "English": [
                 { q: "What is the antonym of the word 'Ancient'?", options: ["Modern", "Old", "Historic", "Past"] },
@@ -243,7 +249,7 @@
                 { q: "Which sector contributes the most to employment in India?", options: ["Primary Sector", "Secondary Sector", "Tertiary Sector", "IT Sector"] },
                 { q: "Where is the headquarters of the United Nations located?", options: ["New York", "Geneva", "Paris", "London"] },
                 { q: "Which imaginary lines run horizontally around the globe?", options: ["Latitudes", "Longitudes", "Contours", "Grid Lines"] },
-                { q: "Who was the first European to reach India by sea?", options: ["Vasco da Gama", "Christopher Columbus", "Ferdinand Magellan", "Marco Polo"] ] },
+                { q: "Who was the first European to reach India by sea?", options: ["Vasco da Gama", "Christopher Columbus", "Ferdinand Magellan", "Marco Polo"] },
                 { q: "Which animal was widely used in ancient Ashvamedha rituals?", options: ["Horse", "Elephant", "Bull", "Lion"] },
                 { q: "What institution regulates monetary policy in India?", options: ["Reserve Bank of India", "State Bank of India", "Ministry of Finance", "SEBI"] },
                 { q: "Which Indian festival marks the victory of light over darkness?", options: ["Diwali", "Holi", "Eid", "Dussehra"] },
@@ -259,26 +265,24 @@
             
             if(selectedSubject === "Science / Physics") selectedSubject = "Science";
 
-            // Safe reference extraction
             let basePool = subjectsData[selectedSubject] || [];
             let questions = [];
 
-            // Clone structure arrays neatly to maintain original data bank integrity
             basePool.forEach(item => {
                 questions.push({
                     q: item.q,
-                    correctText: item.options[0], // Truth value is always indexed first
+                    correctText: item.options[0],
                     options: [...item.options]
                 });
             });
 
-            // FISHER-YATES SHUFFLE 1: Randomize Question Positions Fully
+            // FISHER-YATES SHUFFLE 1: Randomize Questions
             for (let i = questions.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
                 [questions[i], questions[j]] = [questions[j], questions[i]];
             }
 
-            // FISHER-YATES SHUFFLE 2: Randomize Alternative Options inside each question independently
+            // FISHER-YATES SHUFFLE 2: Randomize Options Individually
             questions.forEach(item => {
                 for (let i = item.options.length - 1; i > 0; i--) {
                     const j = Math.floor(Math.random() * (i + 1));
